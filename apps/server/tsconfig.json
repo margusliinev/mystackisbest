@@ -1,14 +1,17 @@
 {
     "compilerOptions": {
-        "target": "ES2022",
+        "target": "ES2021",
         "module": "CommonJS",
-        "moduleResolution": "node",
         "outDir": "./dist",
-        "rootDir": "./src",
+        "baseUrl": "./",
         "strict": true,
         "sourceMap": true,
-        "esModuleInterop": true,
+        "declaration": true,
+        "incremental": true,
         "skipLibCheck": true,
+        "esModuleInterop": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
         "noUncheckedIndexedAccess": true,
         "forceConsistentCasingInFileNames": true
     },
