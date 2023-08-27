@@ -12,11 +12,10 @@ async function bootstrap() {
             exceptionFactory(errors) {
                 const validationErrors = errors.map((error) => error.constraints);
                 const validationProperties = errors.map((error) => error.property);
-                console.log(validationErrors);
                 return new BadRequestException({
-                    status: 400,
+                    statusCode: 400,
                     message: Object.values(validationErrors[0] || {})[0],
-                    type: validationProperties[0] || 'server',
+                    field: validationProperties[0] || null,
                 });
             },
         })
