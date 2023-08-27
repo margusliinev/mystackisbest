@@ -2,7 +2,7 @@ import { Injectable, CanActivate, ExecutionContext, UnauthorizedException } from
 import { Observable } from 'rxjs';
 import { JwtService } from '@nestjs/jwt';
 import { Reflector } from '@nestjs/core';
-import { AuthenticatedRequest, JwtPayload } from './auth.types';
+import { AuthenticatedRequest, JwtPayload } from '../app.types';
 
 import { SetMetadata } from '@nestjs/common';
 

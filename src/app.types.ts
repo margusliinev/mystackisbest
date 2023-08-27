@@ -1,7 +1,3 @@
-export interface JwtPayload {
-    sub: string;
-}
-
 export interface AuthenticatedRequest extends Request {
     user: {
         sub: string;
@@ -9,4 +5,8 @@ export interface AuthenticatedRequest extends Request {
     cookies: {
         token: string;
     };
+}
+
+export interface JwtPayload {
+    sub: string;
 }
