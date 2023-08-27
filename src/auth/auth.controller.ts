@@ -3,17 +3,20 @@ import { AuthService } from './auth.service';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
 import { Response } from 'express';
+import { Public } from './auth.guard';
 
 @Controller('auth')
 export class AuthController {
     constructor(private authService: AuthService) {}
 
+    @Public()
     @Post('register')
     async register(@Body() registerDto: RegisterDto) {
         const { user } = await this.authService.register(registerDto);
         return { success: true, data: user };
     }
 
+    @Public()
     @Post('login')
     @HttpCode(200)
     async login(@Body() loginDto: LoginDto, @Res({ passthrough: true }) res: Response) {
@@ -27,6 +30,7 @@ export class AuthController {
         return { success: true, data: user };
     }
 
+    @Public()
     @Post('logout')
     @HttpCode(200)
     logout(@Res({ passthrough: true }) res: Response) {
