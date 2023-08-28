@@ -9,11 +9,16 @@ import { JwtService } from '@nestjs/jwt';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './auth/auth.guard';
 import { UsersModule } from './users/users.module';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 
 @Module({
     imports: [
         ServeStaticModule.forRoot({
             rootPath: join(__dirname, '..', 'client', 'dist'),
+        }),
+        ThrottlerModule.forRoot({
+            ttl: 600,
+            limit: 100,
         }),
         PrismaModule,
         AuthModule,
@@ -23,9 +28,14 @@ import { UsersModule } from './users/users.module';
     providers: [
         AppService,
         JwtService,
+        ThrottlerGuard,
         {
             provide: APP_GUARD,
             useClass: AuthGuard,
+        },
+        {
+            provide: APP_GUARD,
+            useClass: ThrottlerGuard,
         },
     ],
 })
