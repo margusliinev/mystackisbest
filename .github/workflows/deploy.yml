@@ -1,23 +1,30 @@
-name: Deploy
-
+name: Deploy to Railway
 on:
   push:
-    branches:
-      - master
+    branches: [master]
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest  # Specify the type of machine you want to run the job on
+    runs-on: ubuntu-latest
+    
     steps:
-      - name: Checkout repo
+      - name: Checkout
         uses: actions/checkout@v2
-      - name: Setup Node
-        uses: actions/setup-node@v2
+      - name: Use Node 12
+        uses: actions/setup-node@v1
         with:
-          node-version: '14'  # Specify your desired Node.js version here
-      - name: Install dependencies
-        run: npm install
+          node-version: 12.x
+      - name: Install packages
+        run: yarn install --frozen-lockfile
+      - name: Install Railway
+        run: npm i -g @railway/cli
       - run: npm run build
+  
+      - name: Deploy
+        run: railway up
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+        
       - name: Apply all pending migrations to the database
         run: npx prisma migrate deploy
         env:
