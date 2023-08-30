@@ -30,7 +30,7 @@ const PostsPage = () => {
     const { data } = posts;
     return (
         <main className='w-full h-full grid place-items-center'>
-            <div className='mt-40 grid gap-4'>
+            <div className='mt-40 grid gap-4 w-11/12 place-items-center'>
                 {data &&
                     data.map((post: Post) => {
                         return (

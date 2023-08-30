@@ -31,8 +31,8 @@ export const action = async ({ request }: any) => {
 const HomePage = () => {
     return (
         <>
-            <main className='w-screen h-screen grid place-items-center pb-20'>
-                <Form method='post' className='w-full max-w-md bg-card shadow-md p-6 grid gap-6 rounded-md border'>
+            <main className='w-11/12 h-screen grid place-items-center pb-20 mx-auto'>
+                <Form method='post' className='w-full max-w-md bg-card shadow-md p-6 grid gap-6 rounded-md border mx-20'>
                     <h1 className='text-xl font-semibold text-center'>Create your account</h1>
                     <div className='grid gap-3'>
                         <Label htmlFor='email'>Email</Label>
