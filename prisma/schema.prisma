@@ -30,6 +30,7 @@ model Post {
   title     String
   content   String
   published Boolean  @default(false)
+  readTime  Int?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)

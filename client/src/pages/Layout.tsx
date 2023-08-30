@@ -5,14 +5,14 @@ const Layout = () => {
     return (
         <>
             <nav className='absolute h-20 top-0 w-full grid'>
-                <div className='w-full max-w-6xl flex justify-between items-center mx-auto'>
+                <div className='w-11/12 max-w-6xl flex justify-between items-center mx-auto'>
                     <Link to={'/'} className='text-2xl font-semibold'>
                         My Stack Is Best
                     </Link>
                     <ThemeToggle />
                 </div>
             </nav>
-            <div>
+            <div className='w-11/12 mx-auto'>
                 <Outlet />
             </div>
         </>

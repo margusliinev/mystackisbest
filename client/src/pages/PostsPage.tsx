@@ -5,6 +5,7 @@ type Post = {
     title: string;
     content: string;
     published: boolean;
+    readTime: number;
 };
 
 type PostsResponse = {
@@ -35,7 +36,10 @@ const PostsPage = () => {
                         return (
                             <article key={post.id} className='max-w-2xl bg-card p-4 rounded-md shadow-post-card w-full border shadow-md'>
                                 <div className='flex items-center justify-between mb-2'>
-                                    <h2 className='text-xl font-medium'>{post.title}</h2>
+                                    <div>
+                                        <h2 className='text-xl font-medium'>{post.title}</h2>
+                                        {post.readTime && <h3 className='text-sm text-secondary-foreground'>Length: {post.readTime}min</h3>}
+                                    </div>
                                     <p className={post.published ? 'text-green-600' : 'text-red-600'}>{post.published ? 'Published' : 'Draft'}</p>
                                 </div>
                                 <hr className='mb-4 border-primary-foreground'></hr>
