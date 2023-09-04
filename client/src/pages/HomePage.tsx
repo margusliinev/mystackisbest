@@ -5,6 +5,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Form, redirect } from 'react-router-dom';
 import { Button, Input, Label } from '../components/ui';
+import { useState } from 'react';
 
 export const action = async ({ request }: any) => {
     const formData = await request.formData();
@@ -19,7 +20,6 @@ export const action = async ({ request }: any) => {
             },
         });
         if (!response.ok) {
-            console.log(response);
             throw new Error('Something went wrong');
         }
         return redirect('/posts');
@@ -29,11 +29,27 @@ export const action = async ({ request }: any) => {
 };
 
 const HomePage = () => {
+    const [isRegister, setIsRegister] = useState(true);
+
     return (
-        <>
-            <main className='w-11/12 h-screen grid place-items-center pb-20 mx-auto'>
-                <Form method='post' className='w-full max-w-md bg-card shadow-md p-6 grid gap-6 rounded-md border mx-20'>
-                    <h1 className='text-xl font-semibold text-center'>Create your account</h1>
+        <main className='w-11/12 h-screen grid place-items-center pb-20 mx-auto'>
+            {isRegister ? (
+                <Form method='post' className='relative w-full max-w-lg bg-card shadow-md p-6 grid gap-6 rounded-md border mx-20'>
+                    <div className='flex items-center justify-between'>
+                        <h1 className='text-xl font-semibold'>Create your account</h1>
+                        <Button
+                            type='button'
+                            size={'sm'}
+                            className='bg-transparent text-gray-900 hover:bg-transparent'
+                            onClick={() => setIsRegister(!isRegister)}
+                        >
+                            {isRegister ? 'Already have an account?' : "Don't have an account?"}
+                        </Button>
+                    </div>
+                    <div className='grid gap-3'>
+                        <Label htmlFor='username'>Username</Label>
+                        <Input type='username' id='username' name='username'></Input>
+                    </div>
                     <div className='grid gap-3'>
                         <Label htmlFor='email'>Email</Label>
                         <Input type='email' id='email' name='email'></Input>
@@ -44,8 +60,31 @@ const HomePage = () => {
                     </div>
                     <Button size={'sm'}>Sign up</Button>
                 </Form>
-            </main>
-        </>
+            ) : (
+                <Form method='post' className='relative w-full max-w-lg bg-card shadow-md p-6 grid gap-6 rounded-md border mx-20'>
+                    <div className='flex items-center justify-between'>
+                        <h1 className='text-xl font-semibold'>Sign in to your account</h1>
+                        <Button
+                            type='button'
+                            size={'sm'}
+                            className='bg-transparent text-gray-900 hover:bg-transparent'
+                            onClick={() => setIsRegister(!isRegister)}
+                        >
+                            {isRegister ? 'Already have an account?' : "Don't have an account?"}
+                        </Button>
+                    </div>
+                    <div className='grid gap-3'>
+                        <Label htmlFor='email'>Email</Label>
+                        <Input type='email' id='email' name='email'></Input>
+                    </div>
+                    <div className='grid gap-3'>
+                        <Label htmlFor='password'>Password</Label>
+                        <Input type='password' id='password' name='password'></Input>
+                    </div>
+                    <Button size={'sm'}>Sign in</Button>
+                </Form>
+            )}
+        </main>
     );
 };
 

@@ -53,7 +53,7 @@ export class AuthService {
 
         const payload = { sub: user.id };
 
-        const token: string = await this.jwtService.signAsync(payload, { secret: process.env.JWT_SECRET, expiresIn: process.env.JWT_LIFETIME });
+        const token: string = await this.jwtService.signAsync(payload, { secret: process.env.JWT_SECRET, expiresIn: '1d' });
 
         return { user, token };
     }
